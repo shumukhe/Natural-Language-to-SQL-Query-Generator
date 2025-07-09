@@ -1,5 +1,5 @@
 🧠 Natural Language to SQL Query Generator
-🔗 Live Demo <!-- Replace with actual deployed URL -->
+🔗 Live Demo <!-- Replace with actual deployed URL --> https://nl-to-sql-agsvfyssklnjvtrqp5jsbe.streamlit.app/
 
 🚀 Project Summary
 This project allows users to ask natural language questions about a relational database and receive accurate SQL queries as output—automatically generated using Large Language Models (LLMs). It also executes the generated SQL on a local SQLite database and returns the results in tabular form. The system uses a hybrid retrieval mechanism (semantic + keyword search) to provide schema context and supports result caching to optimize performance and cost.
