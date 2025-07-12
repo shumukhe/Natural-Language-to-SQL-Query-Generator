@@ -10,7 +10,7 @@ NL2SQL is a powerful and intelligent application that translates natural languag
 
 ---
 
-## 🔄 Project Flow & Technologies Used
+##  Project Flow & Technologies Used
 
 ```mermaid
 graph TD
