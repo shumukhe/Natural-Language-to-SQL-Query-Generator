@@ -1,116 +1,132 @@
-🧠 Natural Language to SQL Query Generator
-🔗 Live Demo <!-- Replace with actual deployed URL -->
+# 🧠 NL2SQL - Natural Language to SQL Converter
 
-🚀 Project Summary
-This project allows users to ask natural language questions about a relational database and receive accurate SQL queries as output—automatically generated using Large Language Models (LLMs). It also executes the generated SQL on a local SQLite database and returns the results in tabular form. The system uses a hybrid retrieval mechanism (semantic + keyword search) to provide schema context and supports result caching to optimize performance and cost.
+[🔗 Live Demo](https://your-deployed-url.com)&#x20;
 
-⚙️ Project Flow & Tech Stack
-mermaid
-Copy
-Edit
-flowchart TD
-    A[User Inputs NL Query] --> B[Hybrid Retriever (FAISS + BM25)]
-    B --> C[Relevant Schema Chunks]
-    C --> D[Prompt with Context]
-    D --> E[LLM (OpenAI GPT-4o-mini)]
-    E --> F[SQL Query]
-    F --> G[SQLite DB Execution]
-    G --> H[Results in Table]
-    F --> I[Cache Storage]
-    H --> I
-🔧 Technologies Used
-Python 3.11+
+---
 
-LangChain (v0.2+)
+## 📋 Project Summary
 
-OpenAI GPT-4o-mini (for SQL generation)
+NL2SQL is a powerful and intelligent application that translates natural language queries into executable SQL statements using a hybrid retrieval-augmented generation (RAG) pipeline. It leverages a semantic + keyword-based retrieval system to extract schema context from a database and uses an LLM (OpenAI GPT-4o-mini) to generate SQL queries. The project also includes SQL execution and result visualization, making it a complete NL-to-Insight pipeline.
 
-FAISS (for semantic vector search)
+---
 
-BM25Retriever (for keyword-based search)
+## 🔄 Project Flow & Technologies Used
 
-TinyDB (for caching)
+```mermaid
+graph TD
+    A[Natural Language Query] --> B{Check Cache}
+    B -- Hit --> C[Return Cached SQL + Result]
+    B -- Miss --> D[Retrieve Schema Context]
+    D --> E[Use Hybrid Retriever (FAISS + BM25)]
+    E --> F[Generate SQL with OpenAI GPT-4o-mini]
+    F --> G[Execute SQL on SQLite DB]
+    G --> H[Return Result]
+    H --> I[Store in TinyDB Cache]
+```
 
-Streamlit (for UI, if deployed)
+### 🛠️ Key Technologies
 
-SQLite (Chinook database)
+- **LangChain v0.2+**: For LLM pipelines and hybrid retrieval
+- **OpenAI GPT-4o-mini**: For natural language to SQL generation
+- **HuggingFace Embeddings**: For semantic search
+- **FAISS**: Vector-based semantic retrieval
+- **BM25**: Keyword-based retrieval
+- **TinyDB**: Local caching of user queries and results
+- **SQLite**: Target database for SQL execution
+- **Streamlit (optional)**: For interactive frontend (if used)
 
-💬 Sample Questions to Try
-These work well with the Chinook Database:
+---
 
-Which employees have helped the most customers in Canada?
+## 💡 Sample Questions to Try
 
-List all customers from Brazil.
+- `Which employees have helped the most customers in Canada?`
+- `List all customers from USA.`
+- `Show invoices issued in the year 2010.`
+- `How many albums were sold by each employee in Germany?`
 
-Show the top 5 customers by total purchase amount.
+---
 
-Find the genre that generated the most revenue.
+## 💻 How to Run Locally
 
-🧪 How to Run Locally
-🔨 Setup Instructions
-Clone the Repository
+1. **Clone the Repository**
 
-bash
-Copy
-Edit
-git clone https://github.com/your-username/nl-to-sql.git
-cd nl-to-sql
-Create & Activate Virtual Environment
+```bash
+git clone https://github.com/your-username/nl2sql.git
+cd nl2sql
+```
 
-bash
-Copy
-Edit
-conda create -n nl2sqlenv python=3.11 -y
+2. **Create a Virtual Environment**
+
+```bash
+conda create -n nl2sqlenv python=3.10
 conda activate nl2sqlenv
-Install Dependencies
+```
 
-bash
-Copy
-Edit
+3. **Install Dependencies**
+
+```bash
 pip install -r requirements.txt
-Add Your Environment Variables
+```
 
-Create a .env file in the root directory:
+4. **Set Environment Variable**
 
-ini
-Copy
-Edit
-OPENAI_API_KEY=your-openai-key
-Prepare the Database and Vectorstore
+Create a `.env` file in the root directory with your OpenAI key:
 
-Run the scripts in this order:
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
 
-bash
-Copy
-Edit
-python db_utils.py       # Extracts schema from Chinook DB
-python rag_utils.py      # Creates hybrid retriever (FAISS + BM25)
-Run the App or Query Engine
+Or set it manually:
 
-For Backend Testing:
+```bash
+export OPENAI_API_KEY=your_openai_api_key
+```
 
-bash
-Copy
-Edit
+5. **Run the Main Script**
+
+```bash
 python query_engine.py
-Or if you have a Streamlit UI:
+```
 
-bash
-Copy
-Edit
+6. **(Optional) Run Streamlit App**
+
+```bash
 streamlit run app.py
-📂 Folder Structure (Simplified)
-bash
-Copy
-Edit
-NL_to_SQL/
-│
-├── data/                  # Chinook SQLite DB
-├── vectorstore_dir/      # Vector DB + BM25 docs
-├── cache_utils.py        # Caching logic
-├── db_utils.py           # Schema extraction
-├── rag_utils.py          # Retriever creation
-├── query_engine.py       # Core logic for SQL generation and execution
-├── app.py                # Streamlit frontend (optional)
-├── query_cache.json      # Stores past results
-└── .env
+```
+
+---
+
+## 📦 Project Structure
+
+```
+├── app.py                    # (Optional) Streamlit frontend
+├── query_engine.py           # Main logic for NL to SQL conversion
+├── rag_utils.py              # Schema extraction + hybrid retriever
+├── db_utils.py               # SQLite schema parsing
+├── cache_utils.py            # TinyDB cache management
+├── vectorstore_dir/          # FAISS index + BM25 docs
+├── Data/
+│   └── Chinook.sqlite        # Sample SQLite database
+└── query_cache.json          # Cached NL → SQL + results
+```
+
+---
+
+## 🧐 Future Improvements
+
+- ✅ Hybrid Retriever (semantic + keyword)
+- ✅ Caching of queries and results
+- ❌ Multi-turn interaction (can be added later)
+- ❌ User authentication / query history per user
+- ❌ Support for multiple databases
+
+---
+
+## 📬 Contact
+
+For questions or suggestions, feel free to reach out via [LinkedIn](https://linkedin.com/in/your-profile) or raise an issue in the repo.
+
+---
+
+> 💡 This project is a great portfolio piece to showcase LLMOps, retrieval-augmented generation, and data engineering capabilities.
+
