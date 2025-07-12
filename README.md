@@ -1,6 +1,6 @@
 # 🧠 NL2SQL - Natural Language to SQL Converter
 
-[🔗 Live Demo](https://your-deployed-url.com)&#x20;
+[🔗 Live Demo]([https://your-deployed-url.com](https://nl-to-sql-agsvfyssklnjvtrqp5jsbe.streamlit.app/)&#x20;
 
 ---
 
